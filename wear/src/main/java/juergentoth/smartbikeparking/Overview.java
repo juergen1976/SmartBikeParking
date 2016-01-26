@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import java.util.Date;
 
-import juergentoth.smartbikeparking.common.ParkingHistory;
 import juergentoth.smartbikeparking.common.ParkingSlot;
 
 
@@ -19,8 +18,6 @@ public class Overview extends Fragment {
     private TextView txtSlot;
     private TextView txtLocation;
     private TextView txtDuration;
-    private ParkingHistory parkingHistory;
-
 
     public Overview() {
         // Required empty public constructor
@@ -33,14 +30,17 @@ public class Overview extends Fragment {
         txtLocation = (TextView) overview.findViewById(R.id.txtLocation);
         txtDuration = (TextView) overview.findViewById(R.id.txtDuration);
 
+
+
         return overview;
     }
 
     @Override
     public void onStart() {
         super.onStart();
+        ParkSelector parkSelector = (ParkSelector) getActivity();
 
-        ParkingSlot actualSlot = ParkingHistory.getLatestParkingSlot();
+        ParkingSlot actualSlot = parkSelector.getLatestParkingSlot();
         if (actualSlot != null) {
             txtSlot.setText(actualSlot.getSlot());
             txtLocation.setText(actualSlot.getLocation());
@@ -55,5 +55,10 @@ public class Overview extends Fragment {
                 txtDuration.setText("-");
             }
         }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
     }
 }

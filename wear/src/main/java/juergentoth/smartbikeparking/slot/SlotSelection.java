@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import juergentoth.smartbikeparking.ParkSelector;
 import juergentoth.smartbikeparking.R;
 import juergentoth.smartbikeparking.common.ParkingDefinitions;
 import juergentoth.smartbikeparking.common.ParkingHistory;
@@ -17,9 +18,6 @@ import juergentoth.smartbikeparking.common.ParkingHistory;
 public class SlotSelection extends Fragment {
 
     private ParkingDefinitions definitions = new ParkingDefinitions();
-    private ParkingHistory history = new ParkingHistory();
-    private ParkingHistory parkingHistory;
-
 
     public SlotSelection() {
         // Required empty public constructor
@@ -50,7 +48,8 @@ public class SlotSelection extends Fragment {
 
                     // Save actual slot
                     String actualSlot = definitions.getParkingSlots().get(position);
-                    parkingHistory.getActualSlot().setSlot(actualSlot);
+                    ParkSelector parkSelector = (ParkSelector) getActivity();
+                    parkSelector.getActualParkingSlot().setSlot(actualSlot);
                 }
 
                 @Override

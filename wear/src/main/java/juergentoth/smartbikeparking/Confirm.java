@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import java.util.Date;
 
-import juergentoth.smartbikeparking.common.ParkingHistory;
 import juergentoth.smartbikeparking.common.ParkingSlot;
 
 
@@ -22,9 +21,6 @@ public class Confirm extends Fragment implements DelayedConfirmationView.Delayed
     private DelayedConfirmationView mDelayedView;
     private boolean mIsAnimating = false;
     private TextView mTextView;
-
-    private ParkingHistory parkingHistory;
-
 
     public Confirm() {
         // Required empty public constructor
@@ -66,12 +62,13 @@ public class Confirm extends Fragment implements DelayedConfirmationView.Delayed
         mTextView.setText("Speichern");
 
         // Save
+        ParkSelector parkSelector = (ParkSelector) getActivity();
         ParkingSlot actualSlot = new ParkingSlot();
-        actualSlot.setLocation(parkingHistory.getActualSlot().getLocation());
-        actualSlot.setSlot(parkingHistory.getActualSlot().getSlot());
+        actualSlot.setLocation(parkSelector.getActualParkingSlot().getLocation());
+        actualSlot.setSlot(parkSelector.getActualParkingSlot().getSlot());
         actualSlot.setParkDate(new Date());
-
-        parkingHistory.addParkingSlot(actualSlot);
+        parkSelector.addParkingSlot(actualSlot);
+        parkSelector.saveAll();
     }
 
     @Override

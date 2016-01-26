@@ -9,9 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import juergentoth.smartbikeparking.ParkSelector;
 import juergentoth.smartbikeparking.R;
 import juergentoth.smartbikeparking.common.ParkingDefinitions;
-import juergentoth.smartbikeparking.common.ParkingHistory;
 
 public class LocationSelection extends Fragment {
 
@@ -46,7 +46,8 @@ public class LocationSelection extends Fragment {
 
             // Save actual location
             String actualLocation = definitions.getParkingLocations().get(position);
-            ParkingHistory.getActualSlot().setLocation(actualLocation);
+            ParkSelector parkSelector = (ParkSelector) getActivity();
+            parkSelector.getActualParkingSlot().setLocation(actualLocation);
         }
 
         @Override
